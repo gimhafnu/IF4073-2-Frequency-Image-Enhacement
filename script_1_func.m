@@ -1,5 +1,5 @@
 
-f=imread('Tugas2_pdf_images_conv\-002-grey.png');
+f=imread('images\3-1-2.png');
 figure, imshow(f); title("input image");
 filter = "Butterwoth"; %Ideal, Gaussian, Butterwoth
 

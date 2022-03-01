@@ -1,7 +1,7 @@
 clear all;
 clc;
 
-f=imread('Tugas2_pdf_images_conv\-007.png');
+f=imread('images\1-1-grey.png');
 figure, imshow(f); title('original image');
 
 F = fft2(double(f));
