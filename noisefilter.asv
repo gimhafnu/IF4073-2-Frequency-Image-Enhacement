@@ -1,0 +1,24 @@
+function img = noisefilter(im, pixel)
+    [h, w, c] = size(im);
+    if c == 3
+        imgA = rgb2gray(im);
+    end
+    
+    imgA = imadjust(imgA);
+    
+    img_fft = fft2(imgA);            
+    img_fft(1,1) = 0;               
+    imgB = img_fft.*conj(img_fft);  
+    imgC = fftshift(255*(imgB -min(min(imgB))) /(max(max(imgB)) - min(min(imgB))));
+    
+    a = floor(w/2-pixel);
+    b = floor(h/2-pixel);
+    pos = [8, 8, a, b];
+    imgD = SynthesizeFilter(h, w, pos);
+    
+    imgE = ifft2(fftshift(imgD).*img_fft); %filtering
+    
+    imgE = real(imgE);  
+    imgE = uint8(255*(imgE - min(min(imgE))) /(max(max(imgE)) - min(min(imgE))));
+    img = imadjust(imgE);
+end    

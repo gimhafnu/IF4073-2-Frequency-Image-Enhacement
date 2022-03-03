@@ -23,7 +23,7 @@ function varargout = GUI2(varargin)
 
 % Edit the above text to modify the response to help GUI2
 
-% Last Modified by GUIDE v2.5 01-Mar-2022 17:42:47
+% Last Modified by GUIDE v2.5 03-Mar-2022 17:44:16
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -128,19 +128,22 @@ function brightness_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 image = getappdata(0, 'image1');
 F = fft2(double(image));
-G = F * 3;
+G = F * 2.5;
 g=uint8(real(ifft2(G)));
 axes(handles.axes4);
 imshow(g);
 setappdata(0, 'image2', g);
 
-% --- Executes on button press in noise.
-function noise_Callback(hObject, eventdata, handles)
-% hObject    handle to noise (see GCBO)
+% --- Executes on button press in pixel15.
+function pixel15_Callback(hObject, eventdata, handles)
+% hObject    handle to pixel15 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 image = getappdata(0, 'image1');
-F = fft2(double(image));
+oImage = noisefilter(image, 15);
+axes(handles.axes4);
+imshow(oImage);
+setappdata(0, 'image2', oImage);
 
 % --- Executes on button press in butterworthhpf.
 function butterworthhpf_Callback(hObject, eventdata, handles)
@@ -282,3 +285,26 @@ axes(handles.axes5);
 if z > 1
     fourier_spectrum(image(:,:,1));
 end
+
+
+% --- Executes on button press in pixel20.
+function pixel20_Callback(hObject, eventdata, handles)
+% hObject    handle to pixel20 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+image = getappdata(0, 'image1');
+oImage = noisefilter(image, 20);
+axes(handles.axes4);
+imshow(oImage);
+setappdata(0, 'image2', oImage);
+
+% --- Executes on button press in pixel25.
+function pixel25_Callback(hObject, eventdata, handles)
+% hObject    handle to pixel25 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+image = getappdata(0, 'image1');
+oImage = noisefilter(image, 25);
+axes(handles.axes4);
+imshow(oImage);
+setappdata(0, 'image2', oImage);
