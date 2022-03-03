@@ -1,10 +1,6 @@
 function img = noisefilter(im, pixel)
-    [h, w, c] = size(im);
-    if c == 3
-        imgA = rgb2gray(im);
-    end
-    
-    imgA = imadjust(imgA);
+    [h, w, ~] = size(im);
+    imgA = imadjust(im);
     
     img_fft = fft2(imgA);            
     img_fft(1,1) = 0;               

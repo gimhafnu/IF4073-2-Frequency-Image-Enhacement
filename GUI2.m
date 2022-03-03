@@ -140,10 +140,25 @@ function pixel15_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 image = getappdata(0, 'image1');
-oImage = noisefilter(image, 15);
+[~,~,z] = size(image);
 axes(handles.axes4);
-imshow(oImage);
-setappdata(0, 'image2', oImage);
+if z > 1
+    r1=image(:,:,1);
+    g1=image(:,:,2);
+    b1=image(:,:,3);
+    a=noisefilter(r1, 15);
+    b=noisefilter(g1, 15);
+    c=noisefilter(b1, 15);
+    d=cat(3,a,b,c);
+    imshow(d);
+elseif z == 1 
+    a=noisefilter(image, 15);
+    d=cat(3,a);
+    imshow(d);
+else
+    d = image;
+end
+setappdata(0, 'image2', d);
 
 % --- Executes on button press in butterworthhpf.
 function butterworthhpf_Callback(hObject, eventdata, handles)
@@ -293,10 +308,25 @@ function pixel20_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 image = getappdata(0, 'image1');
-oImage = noisefilter(image, 20);
+[~,~,z] = size(image);
 axes(handles.axes4);
-imshow(oImage);
-setappdata(0, 'image2', oImage);
+if z > 1
+    r1=image(:,:,1);
+    g1=image(:,:,2);
+    b1=image(:,:,3);
+    a=noisefilter(r1, 20);
+    b=noisefilter(g1, 20);
+    c=noisefilter(b1, 20);
+    d=cat(3,a,b,c);
+    imshow(d);
+elseif z == 1 
+    a=noisefilter(image, 20);
+    d=cat(3,a);
+    imshow(d);
+else
+    d = image;
+end
+setappdata(0, 'image2', d);
 
 % --- Executes on button press in pixel25.
 function pixel25_Callback(hObject, eventdata, handles)
@@ -304,7 +334,22 @@ function pixel25_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 image = getappdata(0, 'image1');
-oImage = noisefilter(image, 25);
+[~,~,z] = size(image);
 axes(handles.axes4);
-imshow(oImage);
-setappdata(0, 'image2', oImage);
+if z > 1
+    r1=image(:,:,1);
+    g1=image(:,:,2);
+    b1=image(:,:,3);
+    a=noisefilter(r1, 25);
+    b=noisefilter(g1, 25);
+    c=noisefilter(b1, 25);
+    d=cat(3,a,b,c);
+    imshow(d);
+elseif z == 1 
+    a=noisefilter(image, 25);
+    d=cat(3,a);
+    imshow(d);
+else
+    d = image;
+end
+setappdata(0, 'image2', d);
